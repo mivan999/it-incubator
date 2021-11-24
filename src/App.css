@@ -7,21 +7,7 @@
     "n c";
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 10px;
+    /*grid-gap: 10px;*/
 }
-.header{
-    grid-area: h;
-    background-color: green;
-}
-header img{
-    width: 20px;
-    background-color: #2b5c2b;
-}
-.nav{
-    grid-area: n;
-    background-color: #b2925c;
-}
-.content{
-    grid-area: c;
-    background-color: #5787e5;
-}
+
+
