@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Post from "./Post/Post"
 const MyPosts = () => {
     return (
@@ -9,9 +10,8 @@ const MyPosts = () => {
                     </textarea>
                 <button>Add post</button>
             </div>
-            <Post/>
-            <Post/>
-            <Post/>
+            <Post message="Hi, how are you" likeCount={5}/>
+            <Post message="its my first post" likeCount={4} />
         </div>
 
     );
