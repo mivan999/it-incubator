@@ -14,10 +14,10 @@ function App() {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                <Routes>
-                <Route path="/dialogs" element={<Dialogs/>}/>
-                <Route path="/profile" element={<Profile />}/>
-                </Routes>
+                    <Routes>
+                        <Route path="/dialogs/*" element={<Dialogs/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
+                    </Routes>
                 </div>
 
 
