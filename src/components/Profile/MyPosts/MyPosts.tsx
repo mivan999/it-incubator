@@ -3,7 +3,24 @@ import React from 'react';
 import Post from './Post/Post'
 import s from './MyPosts.module.css'
 
+export type PostDataType = {
+    id: number
+    message: string
+    likeCount: number
+}
 const MyPosts = () => {
+    let postData: PostDataType[] = [
+        {
+            id: 0,
+            message: 'Hi hou are you',
+            likeCount: 5
+        },
+        {
+            id: 1,
+            message: 'HI, yo',
+            likeCount: 12
+        },
+    ]
     return (
 
         <div className={s.postBlock}>
@@ -18,8 +35,10 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className="post">
-                <Post message="Hi, how are you" likeCount={5}/>
-                <Post message="its my first post" likeCount={4}/>
+                <Post message={postData[0].message} likeCount={postData[0].likeCount}/>
+                <Post message={postData[1].message} likeCount={postData[1].likeCount}/>
+
+
             </div>
         </div>
 
