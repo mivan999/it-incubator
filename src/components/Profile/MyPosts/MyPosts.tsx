@@ -7,20 +7,13 @@ export type PostDataType = {
     id: number
     message: string
     likeCount: number
+
 }
-const MyPosts = () => {
-    let postData: PostDataType[] = [
-        {
-            id: 0,
-            message: 'Hi hou are you',
-            likeCount: 5
-        },
-        {
-            id: 1,
-            message: 'HI, yo',
-            likeCount: 12
-        },
-    ]
+export type MyPostPropsType={
+    postData:PostDataType[]
+}
+const MyPosts = (props:MyPostPropsType) => {
+    // console.log(props.postData[1].message)
     return (
 
         <div className={s.postBlock}>
@@ -35,8 +28,9 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className="post">
-                <Post message={postData[0].message} likeCount={postData[0].likeCount}/>
-                <Post message={postData[1].message} likeCount={postData[1].likeCount}/>
+                {/*<Post message={props.message} likeCount={props.likeCount}/>*/}
+                <Post message={props.postData[0].message} likeCount={props.postData[0].likeCount}/>
+                <Post message={props.postData[1].message} likeCount={props.postData[1].likeCount}/>
 
 
             </div>

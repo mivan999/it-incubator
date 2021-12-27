@@ -1,16 +1,8 @@
 import React from 'react';
 import s from './Dialogs.module.css'
-import {NavLink} from 'react-router-dom';
-// type DialogsPropsType={
-//
-// }
-type DialogItemPropsType = {
-    name: string
-    id: number
-}
-type MessagesPropsType = {
-    message: string
-}
+import Message from './Message/Message';
+import DialogItem from './DialogsItem/DialogItem';
+
 export type DialogsDataType = {
     id: number
     name: string
@@ -19,59 +11,16 @@ export type MessageDataType = {
     id: number
     message: string
 }
-const DialogItem = (props: DialogItemPropsType) => {
-    let path = '/dialogs/' + String(props.id)
-    return (
-        <div className={s.dialog + ' ' + s.active}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
+export type DialogsPropsType={
+    dialogsData:DialogsDataType[]
+    messageData:MessageDataType[]
 }
-const Message = (props: MessagesPropsType) => {
+const Dialogs = (props:DialogsPropsType) => {
 
-    return <div className={s.dialog}>{props.message}</div>
-}
-const Dialogs = () => {
-    let dialogsData: DialogsDataType[] = [
-        {
-            id: 0,
-            name: 'Dimych'
-        },
-        {
-            id: 1,
-            name: 'Andrey'
-        },
-        {
-            id: 2,
-            name: 'Sveta'
-        },
-        {
-            id: 3,
-            name: 'Sasha'
-        },
-        {
-            id: 4,
-            name: 'Viktor'
-        },
-        {
-            id: 5,
-            name: 'Valera'
-        }
-
-    ]
-    let messageData:MessageDataType[]=[
-        {
-            id:0,
-            message:"Hi"
-        },
-        {id:1,
-            message:"Yo"
-        }
-    ]
-    let dialogsElement=dialogsData.map((d)=>
+    let dialogsElement=props.dialogsData.map((d)=>
         <DialogItem name={d.name} id={d.id}/>
     )
-    let messageElement=messageData.map((m)=>
+    let messageElement=props.messageData.map((m)=>
         <Message message={m.message}/>
     )
     return (
@@ -82,7 +31,7 @@ const Dialogs = () => {
             <div className={s.messages}>
                 {messageElement}
 
-                <Message message={messageData[1].message}/>
+                <Message message={props.messageData[1].message}/>
             </div>
         </div>
     )
