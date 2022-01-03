@@ -9,6 +9,12 @@ type MessagesPropsType = {
 
 const Message = (props: MessagesPropsType) => {
 
-    return <div className={s.dialog}>{props.message}</div>
+
+    //let text=newMessage.current.value
+    return <div className={s.dialog}>{props.message}
+
+    {/*<textarea id={newMessage}></textarea>*/}
+
+    </div>
 }
 export default Message;

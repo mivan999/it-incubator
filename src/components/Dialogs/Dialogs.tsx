@@ -15,6 +15,8 @@ export type MessageDataType = {
 export type DialogsPropsType={
     state:DialogsPageType
 }
+let newMessage=React.createRef<HTMLTextAreaElement>()
+
 const Dialogs:React.FC<DialogsPropsType>= (props) => {
 debugger;
     let dialogsElement=props.state.dialogs.map((d)=>
@@ -22,7 +24,12 @@ debugger;
     )
     let messageElement=props.state.messages.map((m)=>
         <Message message={m.message}/>
+
     )
+    let sendMessage=()=>{
+        let text=newMessage.current?.value
+        alert(text)
+    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -30,7 +37,9 @@ debugger;
             </div>
             <div className={s.messages}>
                 {messageElement}
-                <Message message={props.state.messages[1].message}/>
+
+                <div><textarea ref={newMessage}>123</textarea></div>
+             <button onClick={sendMessage}>send message  </button>
             </div>
         </div>
     )
