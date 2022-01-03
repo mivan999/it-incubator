@@ -5,10 +5,13 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {AppPropsType} from './index';
+import {addPostType, StateType} from './redux/state';
 
-
-function App(props: AppPropsType) {
+type PropsType = {
+    state: StateType
+    addPost: (postMessage:addPostType) => void
+}
+function App(props: PropsType) {
 
     return (
         <Router>

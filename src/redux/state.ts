@@ -1,5 +1,6 @@
 import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
+import {rerenderEntireTree} from '../render';
 
 export type ProfilePageType = {
 
@@ -100,6 +101,9 @@ export let addPost=(postMessage:addPostType)=>{
         message:postMessage.message,
         likeCount:0,
     }
+    // console.log("addPost")
     state.profilePage.posts.push(newPost)
+    // console.log(state.profilePage.posts)
+    rerenderEntireTree(state)
 }
 export default state
