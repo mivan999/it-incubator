@@ -23,6 +23,9 @@ export type FriendsType = {
 export type SidebarType={
     friends:FriendsType[]
 }
+export type addPostType={
+    message:string|undefined
+}
 let state: StateType = {
     profilePage: {
 
@@ -90,5 +93,13 @@ let state: StateType = {
             ava:'#',}
         ]
     }
+}
+export let addPost=(postMessage:addPostType)=>{
+ let newPost:PostDataType={
+        id:3,
+        message:postMessage.message,
+        likeCount:0,
+    }
+    state.profilePage.posts.push(newPost)
 }
 export default state

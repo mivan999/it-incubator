@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Post.module.css"
 type PostPropsType ={
-    message: string
+    message: string|undefined
     likeCount:number
 }
 const Post = (props:PostPropsType) => {

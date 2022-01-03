@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, {StateType} from './redux/state'
+import state, {addPost, addPostType, StateType} from './redux/state'
 
 
 export type AppPropsType = {
     state: StateType
+    addPost:(message:addPostType)=>void
 }
 ReactDOM.render(
     <React.StrictMode>
         <App
             state={state}
+            addPost={addPost}
         />
     </React.StrictMode>,
     document.getElementById('root')

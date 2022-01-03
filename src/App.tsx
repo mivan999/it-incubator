@@ -24,6 +24,7 @@ function App(props: AppPropsType) {
                         <Route path="/profile" element={
                             <Profile
                                 postData={props.state.profilePage.posts}
+                                addPost={props.addPost}
                             />}/>
                     </Routes>
                 </div>
