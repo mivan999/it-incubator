@@ -3,71 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {DialogsDataType, MessageDataType} from './components/Dialogs/Dialogs';
-import {PostDataType} from './components/Profile/MyPosts/MyPosts';
+import state, {StateType} from './redux/state'
 
-let dialogsData: DialogsDataType[] = [
-    {
-        id: 0,
-        name: 'Dimych'
-    },
-    {
-        id: 1,
-        name: 'Andrey'
-    },
-    {
-        id: 2,
-        name: 'Sveta'
-    },
-    {
-        id: 3,
-        name: 'Sasha'
-    },
-    {
-        id: 4,
-        name: 'Viktor'
-    },
-    {
-        id: 5,
-        name: 'Valera'
-    }
-
-]
-let messageData: MessageDataType[] = [
-    {
-        id: 0,
-        message: 'Hi!'
-    },
-    {
-        id: 1,
-        message: 'Yo'
-    }
-]
-
-let postData: PostDataType[] = [
-    {
-        id: 0,
-        message: 'Hi hou are you',
-        likeCount: 5
-    },
-    {
-        id: 1,
-        message: 'HI, yo',
-        likeCount: 12
-    },
-]
 
 export type AppPropsType = {
-    dialogsData: DialogsDataType[],
-    messageData: MessageDataType[],
-    postData:PostDataType[],
+    state: StateType
 }
 ReactDOM.render(
     <React.StrictMode>
         <App
-            dialogsData={dialogsData}
-            messageData={messageData}
-            postData={postData}
+            state={state}
         />
     </React.StrictMode>,
     document.getElementById('root')

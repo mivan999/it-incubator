@@ -1,8 +1,13 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
+import Friends from './Friends/Friends';
+import { SidebarType} from '../../redux/state';
 
-const Navbar = () => {
+// export type NavbarPropsType={
+//     friends:FriendsType
+// }
+const Navbar = (props:SidebarType) => {
 
     return (
         <nav className={s.nav}>
@@ -11,6 +16,7 @@ const Navbar = () => {
             </div>
             <div className={s.item }>
                 <NavLink to="/dialogs" className = { navData => navData.isActive ? s.active : s.item }>Messages</NavLink>
+                <Friends friends={props.friends}/>
             {/*</div>*/}
             {/*/!*<div className={s.item}>*!/*/}
             {/*    <NavLink to "/">News</NavLink>*/}

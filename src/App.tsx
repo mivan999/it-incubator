@@ -14,17 +14,16 @@ function App(props: AppPropsType) {
         <Router>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar friends={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path="/dialogs/*" element={
                             <Dialogs
-                                dialogsData={props.dialogsData}
-                                messageData={props.messageData}
+                                state={props.state.dialogsPage}
                             />}/>
                         <Route path="/profile" element={
                             <Profile
-                                postData={props.postData}
+                                postData={props.state.profilePage.posts}
                             />}/>
                     </Routes>
                 </div>
