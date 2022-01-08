@@ -11,8 +11,10 @@ export type PostDataType = {
 
 }
 export type MyPostPropsType={
-    postData:PostDataType[]
+    posts:PostDataType[]
+    newPostText:string|undefined
     addPost:(message:addPostType)=>void
+    updateNewPostText:(newText:string|undefined)=>void
 }
 const MyPosts = (props:MyPostPropsType) => {
     let newPost=React.createRef<HTMLTextAreaElement>()
@@ -21,6 +23,11 @@ const MyPosts = (props:MyPostPropsType) => {
         let post:addPostType={message:""}
         post.message=newPost.current?.value
         props.addPost(post)
+
+    }
+    let onPostChange=()=>{
+        let text=newPost.current?.value
+        props.updateNewPostText(text)
     }
     return (
 
@@ -28,7 +35,7 @@ const MyPosts = (props:MyPostPropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPost}>
+                    <textarea onChange={onPostChange} ref={newPost} value={props.newPostText}>
                     </textarea>
                 </div>
                 <div>
@@ -36,8 +43,8 @@ const MyPosts = (props:MyPostPropsType) => {
                 </div>
             </div>
             <div className="post">
-                <Post message={props.postData[0].message} likeCount={props.postData[0].likeCount}/>
-                <Post message={props.postData[1].message} likeCount={props.postData[1].likeCount}/>
+                <Post message={props.posts[0].message} likeCount={props.posts[0].likeCount}/>
+                <Post message={props.posts[1].message} likeCount={props.posts[1].likeCount}/>
             </div>
         </div>
 

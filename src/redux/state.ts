@@ -5,6 +5,7 @@ import {rerenderEntireTree} from '../render';
 export type ProfilePageType = {
 
     posts: PostDataType[]
+    newPostText: string|undefined
 }
 export type DialogsPageType = {
     dialogs: DialogsDataType[]
@@ -27,6 +28,7 @@ export type SidebarType={
 export type addPostType={
     message:string|undefined
 }
+
 let state: StateType = {
     profilePage: {
 
@@ -42,6 +44,7 @@ let state: StateType = {
                     likeCount: 12
                 },
             ],
+            newPostText:'it',
         },
     dialogsPage: {
         dialogs: [
@@ -103,7 +106,13 @@ export let addPost=(postMessage:addPostType)=>{
     }
     // console.log("addPost")
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText=""
     // console.log(state.profilePage.posts)
+    rerenderEntireTree(state)
+}
+export let updateNewPostText=(newText:string|undefined)=>{
+      state.profilePage.newPostText=newText
+
     rerenderEntireTree(state)
 }
 export default state

@@ -10,6 +10,7 @@ import {addPostType, StateType} from './redux/state';
 type PropsType = {
     state: StateType
     addPost: (postMessage:addPostType) => void
+    updateNewPostText:(newText:string|undefined)=>void
 }
 function App(props: PropsType) {
 
@@ -26,8 +27,10 @@ function App(props: PropsType) {
                             />}/>
                         <Route path="/profile" element={
                             <Profile
-                                postData={props.state.profilePage.posts}
+
+                                profilePage={props.state.profilePage}
                                 addPost={props.addPost}
+                                updateNewPostText={props.updateNewPostText}
                             />}/>
                     </Routes>
                 </div>
