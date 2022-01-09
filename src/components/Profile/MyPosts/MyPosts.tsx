@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Post from './Post/Post'
+import {Post} from './Post/Post'
 import s from './MyPosts.module.css'
 import {addPostType} from '../../../redux/state';
 
@@ -17,6 +17,7 @@ export type MyPostPropsType={
     updateNewPostText:(newText:string|undefined)=>void
 }
 const MyPosts = (props:MyPostPropsType) => {
+    console.log("MyPosts props", props)
     let newPost=React.createRef<HTMLTextAreaElement>()
 
     let addPost=()=> {
@@ -43,8 +44,9 @@ const MyPosts = (props:MyPostPropsType) => {
                 </div>
             </div>
             <div className="post">
-                <Post message={props.posts[0].message} likeCount={props.posts[0].likeCount}/>
-                <Post message={props.posts[1].message} likeCount={props.posts[1].likeCount}/>
+                {props.posts.map(m=>(
+                    <Post message={m.message} likeCount={m.likeCount}/>
+                ))}
             </div>
         </div>
 

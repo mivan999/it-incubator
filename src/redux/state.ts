@@ -1,11 +1,14 @@
 import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
-import {rerenderEntireTree} from '../render';
+
+let rerenderEntireTree = () => {
+    console.log('state changed')
+}
 
 export type ProfilePageType = {
 
     posts: PostDataType[]
-    newPostText: string|undefined
+    newPostText: string | undefined
 }
 export type DialogsPageType = {
     dialogs: DialogsDataType[]
@@ -15,37 +18,37 @@ export type DialogsPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-    sidebar:SidebarType
+    sidebar: SidebarType
 }
 export type FriendsType = {
     id: number
     name: string
     ava: string
 }
-export type SidebarType={
-    friends:FriendsType[]
+export type SidebarType = {
+    friends: FriendsType[]
 }
-export type addPostType={
-    message:string|undefined
+export type addPostType = {
+    message: string | undefined
 }
 
 let state: StateType = {
     profilePage: {
 
-            posts: [
-                {
-                    id: 0,
-                    message: 'Hi hou are you',
-                    likeCount: 5
-                },
-                {
-                    id: 1,
-                    message: 'HI, yo',
-                    likeCount: 12
-                },
-            ],
-            newPostText:'it',
-        },
+        posts: [
+            {
+                id: 0,
+                message: 'Hi hou are you',
+                likeCount: 5
+            },
+            {
+                id: 1,
+                message: 'HI, yo',
+                likeCount: 12
+            },
+        ],
+        newPostText: 'it',
+    },
     dialogsPage: {
         dialogs: [
             {
@@ -92,27 +95,30 @@ let state: StateType = {
                 name: 'Andriy',
                 ava: '#',
             },
-            {id:1,
-            name:"Sveta",
-            ava:'#',}
+            {
+                id: 1,
+                name: 'Sveta',
+                ava: '#',
+            }
         ]
     }
 }
-export let addPost=(postMessage:addPostType)=>{
- let newPost:PostDataType={
-        id:3,
-        message:postMessage.message,
-        likeCount:0,
+export let addPost = (postMessage: addPostType) => {
+    let newPost: PostDataType = {
+        id: 3,
+        message: postMessage.message,
+        likeCount: 0,
     }
-    // console.log("addPost")
     state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText=""
-    // console.log(state.profilePage.posts)
-    rerenderEntireTree(state)
+    state.profilePage.newPostText = ''
+    rerenderEntireTree()
 }
-export let updateNewPostText=(newText:string|undefined)=>{
-      state.profilePage.newPostText=newText
+export let updateNewPostText = (newText: string | undefined) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree()
+}
+export let subscriber = (observer: () => void) => {
+    rerenderEntireTree = observer
+}
 
-    rerenderEntireTree(state)
-}
 export default state

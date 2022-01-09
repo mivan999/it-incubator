@@ -4,7 +4,7 @@ type PostPropsType ={
     message: string|undefined
     likeCount:number
 }
-const Post = (props:PostPropsType) => {
+export const Post = (props:PostPropsType) => {
     return (
 
         <div className={s.item}>
@@ -20,4 +20,3 @@ const Post = (props:PostPropsType) => {
     );
 };
 
-export default Post;

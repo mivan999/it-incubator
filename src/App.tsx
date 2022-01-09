@@ -13,7 +13,7 @@ type PropsType = {
     updateNewPostText:(newText:string|undefined)=>void
 }
 function App(props: PropsType) {
-
+    console.log("App props", props)
     return (
         <Router>
             <div className="app-wrapper">
