@@ -1,6 +1,6 @@
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {subscriber} from './redux/state';
+import store from './redux/state';
 // import ReactDOM from 'react-dom';
 // import App from './App';
 import React from 'react';
@@ -8,8 +8,8 @@ import { rerenderEntireTree } from './render';
 
 
 
-subscriber(rerenderEntireTree)
-rerenderEntireTree()
+store.subscriber(rerenderEntireTree)
+store.rerenderEntireTree()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -5,32 +5,33 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {addPostType, StateType} from './redux/state';
+import {addPostType, StoreType} from './redux/state';
 
 type PropsType = {
-    state: StateType
+    store: StoreType
     addPost: (postMessage:addPostType) => void
     updateNewPostText:(newText:string|undefined)=>void
 }
 function App(props: PropsType) {
     console.log("App props", props)
+    const state=props.store.getState()
     return (
         <Router>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friends={props.state.sidebar.friends}/>
+                <Navbar friends={state.sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path="/dialogs/*" element={
                             <Dialogs
-                                state={props.state.dialogsPage}
+                                state={state.dialogsPage}
                             />}/>
                         <Route path="/profile" element={
                             <Profile
 
-                                profilePage={props.state.profilePage}
-                                addPost={props.addPost}
-                                updateNewPostText={props.updateNewPostText}
+                                profilePage={state.profilePage}
+                                addPost={props.store.addPost.bind(props.store)}
+                                updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                             />}/>
                     </Routes>
                 </div>
