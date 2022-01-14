@@ -2,6 +2,8 @@ import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
 
 
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_POST='ADD-POST'
 
 export type ProfilePageType = {
 
@@ -39,7 +41,12 @@ export type StoreType={
     subscriber: (observer: () => void)=>void
     rerenderEntireTree:()=>void
     getState:()=>StateType
+    dispatch:(action:ActionType)=>void
 }
+
+export const ChangePostAC=(text:string|undefined)=>({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
+export const AddPostAC = (post:addPostType) =>  ({type: ADD_POST,postMessage:post} as const)
+export type ActionType=ReturnType<typeof AddPostAC>|ReturnType<typeof ChangePostAC>
 const store: StoreType={
     _state:  {
         profilePage: {
@@ -134,6 +141,21 @@ const store: StoreType={
     },
     getState(){
         return this._state
+    },
+    dispatch(action:ActionType){
+        if (action.type===ADD_POST){
+            let newPost: PostDataType = {
+                id: 3,
+                message: action.postMessage.message,
+                likeCount: 0,
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this.rerenderEntireTree()
+        } else if(action.type===UPDATE_NEW_POST_TEXT){
+            this._state.profilePage.newPostText = action.newText
+            this.rerenderEntireTree()
+        }
     }
 }
 export default store

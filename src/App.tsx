@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {addPostType, StoreType} from './redux/state';
+import store, {addPostType, StoreType} from './redux/state';
 
 type PropsType = {
     store: StoreType
@@ -28,10 +28,10 @@ function App(props: PropsType) {
                             />}/>
                         <Route path="/profile" element={
                             <Profile
-
+                                store={props.store}
                                 profilePage={state.profilePage}
-                                addPost={props.store.addPost.bind(props.store)}
-                                updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                dispatch={props.store.dispatch.bind(store)}
+
                             />}/>
                     </Routes>
                 </div>
