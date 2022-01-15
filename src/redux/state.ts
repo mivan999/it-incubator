@@ -1,11 +1,9 @@
 import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
+import profileReducer, {AddPostAC, ChangePostAC} from './profile-reducer';
+import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from './dialogs-reducer';
 
 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
-const ADD_POST='ADD-POST'
-const SEND_MESSAGE='SEND_MESSAGE'
 
 export type ProfilePageType = {
 
@@ -15,7 +13,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: DialogsDataType[]
     messages: MessageDataType[]
-    newMessageBody:string
+    newMessageBody: string
 }
 
 export type StateType = {
@@ -36,24 +34,23 @@ export type addPostType = {
 }
 
 
-
-export type StoreType={
-    _state:StateType
-    addPost:(postMessage: addPostType)=>void
-    updateNewPostText: (newText: string | undefined)=>void
-    subscriber: (observer: () => void)=>void
-    rerenderEntireTree:()=>void
-    getState:()=>StateType
-    dispatch:(action:ActionType)=>void
+export type StoreType = {
+    _state: StateType
+    addPost: (postMessage: addPostType) => void
+    updateNewPostText: (newText: string | undefined) => void
+    subscriber: (observer: () => void) => void
+    rerenderEntireTree: () => void
+    getState: () => StateType
+    dispatch: (action: ActionType) => void
 }
 
-export const ChangePostAC=(text:string|undefined)=>({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
-export const AddPostAC = (post:addPostType) =>  ({type: ADD_POST,postMessage:post} as const)
-export const sendMessageAC = () =>  ({type: SEND_MESSAGE} as const)
-export const updateNewMessageBodyAC = (body:string) =>  ({type: UPDATE_NEW_MESSAGE_BODY,body:body} as const)
-export type ActionType=ReturnType<typeof AddPostAC>|ReturnType<typeof ChangePostAC>|ReturnType<typeof updateNewMessageBodyAC>|ReturnType<typeof sendMessageAC>
-const store: StoreType={
-    _state:  {
+export type ActionType =
+    ReturnType<typeof AddPostAC>
+    | ReturnType<typeof ChangePostAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
+const store: StoreType = {
+    _state: {
         profilePage: {
 
             posts: [
@@ -108,7 +105,7 @@ const store: StoreType={
                     message: 'Yo'
                 }
             ],
-            newMessageBody:""
+            newMessageBody: ''
         },
         sidebar: {
             friends: [
@@ -125,7 +122,7 @@ const store: StoreType={
             ]
         }
     },
-    addPost (postMessage: addPostType) {
+    addPost(postMessage: addPostType) {
         let newPost: PostDataType = {
             id: 3,
             message: postMessage.message,
@@ -135,42 +132,25 @@ const store: StoreType={
         this._state.profilePage.newPostText = ''
         this.rerenderEntireTree()
     },
-    updateNewPostText (newText: string | undefined) {
+    updateNewPostText(newText: string | undefined) {
         this._state.profilePage.newPostText = newText
         this.rerenderEntireTree()
     },
-    subscriber (observer: () => void) {
+    subscriber(observer: () => void) {
         this.rerenderEntireTree = observer
     },
-    rerenderEntireTree () {
+    rerenderEntireTree() {
         console.log('state changed')
     },
-    getState(){
+    getState() {
         return this._state
     },
-    dispatch(action:ActionType){
-        if (action.type===ADD_POST){
-            let newPost: PostDataType = {
-                id: 3,
-                message: action.postMessage.message,
-                likeCount: 0,
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this.rerenderEntireTree()
-        } else if(action.type===UPDATE_NEW_POST_TEXT){
-            this._state.profilePage.newPostText = action.newText
-            this.rerenderEntireTree()
-        } else if(action.type===UPDATE_NEW_MESSAGE_BODY){
-            this._state.dialogsPage.newMessageBody=action.body
-            this.rerenderEntireTree()
-        } else if(action.type===SEND_MESSAGE){
-            let body=this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.messages.push({id:2, message:body})
-            this._state.dialogsPage.newMessageBody=""
+    dispatch(action: ActionType) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this.rerenderEntireTree()
 
-            this.rerenderEntireTree()
-        }
     }
 }
 export default store
