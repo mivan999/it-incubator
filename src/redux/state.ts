@@ -3,7 +3,9 @@ import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
 
 
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 const ADD_POST='ADD-POST'
+const SEND_MESSAGE='SEND_MESSAGE'
 
 export type ProfilePageType = {
 
@@ -13,6 +15,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: DialogsDataType[]
     messages: MessageDataType[]
+    newMessageBody:string
 }
 
 export type StateType = {
@@ -46,7 +49,9 @@ export type StoreType={
 
 export const ChangePostAC=(text:string|undefined)=>({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
 export const AddPostAC = (post:addPostType) =>  ({type: ADD_POST,postMessage:post} as const)
-export type ActionType=ReturnType<typeof AddPostAC>|ReturnType<typeof ChangePostAC>
+export const sendMessageAC = () =>  ({type: SEND_MESSAGE} as const)
+export const updateNewMessageBodyAC = (body:string) =>  ({type: UPDATE_NEW_MESSAGE_BODY,body:body} as const)
+export type ActionType=ReturnType<typeof AddPostAC>|ReturnType<typeof ChangePostAC>|ReturnType<typeof updateNewMessageBodyAC>|ReturnType<typeof sendMessageAC>
 const store: StoreType={
     _state:  {
         profilePage: {
@@ -103,6 +108,7 @@ const store: StoreType={
                     message: 'Yo'
                 }
             ],
+            newMessageBody:""
         },
         sidebar: {
             friends: [
@@ -154,6 +160,15 @@ const store: StoreType={
             this.rerenderEntireTree()
         } else if(action.type===UPDATE_NEW_POST_TEXT){
             this._state.profilePage.newPostText = action.newText
+            this.rerenderEntireTree()
+        } else if(action.type===UPDATE_NEW_MESSAGE_BODY){
+            this._state.dialogsPage.newMessageBody=action.body
+            this.rerenderEntireTree()
+        } else if(action.type===SEND_MESSAGE){
+            let body=this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.messages.push({id:2, message:body})
+            this._state.dialogsPage.newMessageBody=""
+
             this.rerenderEntireTree()
         }
     }
