@@ -2,8 +2,9 @@ import React from 'react';
 
 import {Post} from './Post/Post'
 import s from './MyPosts.module.css'
-import {ActionType, addPostType, StoreType} from '../../../redux/state';
+import {ActionType, addPostType} from '../../../redux/state';
 import {AddPostAC, ChangePostAC} from '../../../redux/profile-reducer';
+import {StoreType} from '../../../redux/redux-store';
 
 
 

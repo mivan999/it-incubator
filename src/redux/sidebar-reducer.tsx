@@ -3,7 +3,7 @@
 const sidebarReducer = (
     // state:StoreType, action:ActionType
 ) => {
-
-    return state
+    console.log("s")
+    // return state
 }
 export default sidebarReducer;

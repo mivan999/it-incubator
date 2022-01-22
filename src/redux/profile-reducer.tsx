@@ -2,8 +2,23 @@ import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
 import {ActionType, addPostType, ProfilePageType} from './state';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST='ADD-POST'
+let initialState:ProfilePageType={
 
-const profileReducer = (state:ProfilePageType, action:ActionType) => {
+        posts: [
+            {
+                id: 0,
+                message: 'Hi hou are you',
+                likeCount: 5
+            },
+            {
+                id: 1,
+                message: 'HI, yo',
+                likeCount: 12
+            },
+        ],
+        newPostText: 'it',
+    }
+const profileReducer = (state:ProfilePageType=initialState, action:ActionType) => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostDataType = {
