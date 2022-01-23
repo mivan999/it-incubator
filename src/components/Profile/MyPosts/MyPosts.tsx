@@ -1,11 +1,7 @@
 import React from 'react';
-
 import {Post} from './Post/Post'
 import s from './MyPosts.module.css'
-import {ActionType, addPostType} from '../../../redux/state';
-import {AddPostAC, ChangePostAC} from '../../../redux/profile-reducer';
-import {StoreType} from '../../../redux/redux-store';
-
+import {addPostType} from '../../../redux/state';
 
 
 export type PostDataType = {
@@ -17,8 +13,8 @@ export type PostDataType = {
 export type MyPostPropsType={
     posts:PostDataType[]
     newPostText:string|undefined
-    dispatch:(action:ActionType)=>void
-    store:StoreType
+    updateNewPostText:(text:string)=>void
+    addPost:(post:addPostType)=>void
 }
 const MyPosts = (props:MyPostPropsType) => {
     console.log("MyPosts props", props)
@@ -27,14 +23,11 @@ const MyPosts = (props:MyPostPropsType) => {
     let addPost=()=> {
         let post:addPostType={message:""}
         post.message=newPost.current?.value
-        // props.addPost(post)
-        props.dispatch(AddPostAC(post))
-
+        props.addPost(post)
     }
     let onPostChange=()=>{
         let text=newPost.current?.value
-        // props.updateNewPostText(text)
-        props.dispatch(ChangePostAC(text))
+        if (text) props.updateNewPostText(text)
     }
     return (
 

@@ -3,8 +3,6 @@ import s from './Dialogs.module.css'
 import Message from './Message/Message';
 import DialogItem from './DialogsItem/DialogItem';
 import {DialogsPageType} from '../../redux/state';
-import {sendMessageAC, updateNewMessageBodyAC} from '../../redux/dialogs-reducer';
-import {StoreType} from '../../redux/redux-store';
 
 
 export type DialogsDataType = {
@@ -15,30 +13,30 @@ export type MessageDataType = {
     id: number
     message: string
 }
-export type DialogsPropsType={
-
-    store:StoreType
-        dialogsP:DialogsPageType
+export type DialogsPropsType = {
+    dialogsP: DialogsPageType
+    updateNewMessageBody: (body: string) => void
+    sendMessage:()=>void
 }
-let newMessage=React.createRef<HTMLTextAreaElement>()
+let newMessage = React.createRef<HTMLTextAreaElement>()
 
-const Dialogs:React.FC<DialogsPropsType>= (props) => {
-debugger;
-    let dialogsElement=props.dialogsP.dialogs.map((d)=>
+const Dialogs: React.FC<DialogsPropsType> = (props) => {
+
+    let dialogsElement = props.dialogsP.dialogs.map((d) =>
         <DialogItem name={d.name} id={d.id}/>
     )
-    let messageElement=props.dialogsP.messages.map((m)=>
+    let messageElement = props.dialogsP.messages.map((m) =>
         <Message message={m.message}/>
-
     )
-    let newMessageBody=props.dialogsP.newMessageBody
-    let onSendMessageClick=()=>{
-        props.store.dispatch(sendMessageAC())
+    let newMessageBody = props.dialogsP.newMessageBody
+    let onSendMessageClick = () => {
+        props.sendMessage()
 
     }
-    let onNewMessageChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-        let body=e.currentTarget.value.toString()
-        props.store.dispatch(updateNewMessageBodyAC(body))
+    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = e.currentTarget.value.toString()
+        props.updateNewMessageBody(body)
+
     }
     return (
         <div className={s.dialogs}>
@@ -49,8 +47,12 @@ debugger;
                 <div>{messageElement}</div>
 
                 <div>
-                    <textarea ref={newMessage} value={newMessageBody} onChange={(e)=>onNewMessageChange(e)}>hello</textarea></div>
-                <div><button onClick={onSendMessageClick}>send message  </button></div>
+                    <textarea ref={newMessage} value={newMessageBody}
+                              onChange={(e) => onNewMessageChange(e)}>hello</textarea>
+                </div>
+                <div>
+                    <button onClick={onSendMessageClick}>send message</button>
+                </div>
             </div>
         </div>
     )

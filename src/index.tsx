@@ -3,12 +3,11 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux/redux-store';
 // import ReactDOM from 'react-dom';
 // import App from './App';
-import { rerenderEntireTree } from './render';
-
+import {rerenderEntireTree} from './render';
 
 
 store.subscribe(()=>{
-    // let state=store.getState()
+
     rerenderEntireTree()
 })
 rerenderEntireTree()
