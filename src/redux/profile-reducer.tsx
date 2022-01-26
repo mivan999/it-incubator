@@ -23,7 +23,6 @@ const profileReducer = (state:ProfilePageType=initialState, action:ActionType):P
         case ADD_POST:{
             let newPost: PostDataType = {
                 id: 3,
-                // message: action.postMessage.message,
                 message: state.newPostText,
                 likeCount: 0,
             }
@@ -31,8 +30,6 @@ const profileReducer = (state:ProfilePageType=initialState, action:ActionType):P
             newState.posts=[...state.posts]
             newState.posts.push(newPost)
             newState.newPostText=''
-            // state.posts.push(newPost)
-            // state.newPostText = ''
             return newState;}
         case UPDATE_NEW_POST_TEXT: {
             let newState = {...state}
