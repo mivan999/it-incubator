@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
 import DialogItem from './DialogsItem/DialogItem';
-import {DialogsPageType} from '../../redux/state';
+import {DialogsPropsType} from "./DialogsContainer";
 
 
 export type DialogsDataType = {
@@ -13,11 +13,7 @@ export type MessageDataType = {
     id: number
     message: string
 }
-export type DialogsPropsType = {
-    dialogsP: DialogsPageType
-    updateNewMessageBody: (body: string) => void
-    sendMessage:()=>void
-}
+
 let newMessage = React.createRef<HTMLTextAreaElement>()
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {

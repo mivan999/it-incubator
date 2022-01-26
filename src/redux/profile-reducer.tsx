@@ -18,21 +18,28 @@ let initialState:ProfilePageType={
         ],
         newPostText: 'it',
     }
-const profileReducer = (state:ProfilePageType=initialState, action:ActionType) => {
+const profileReducer = (state:ProfilePageType=initialState, action:ActionType):ProfilePageType => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST:{
             let newPost: PostDataType = {
                 id: 3,
                 // message: action.postMessage.message,
                 message: state.newPostText,
                 likeCount: 0,
             }
-            state.posts.push(newPost)
-            state.newPostText = ''
-            return state;
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return state;
+            let newState={...state}
+            newState.posts=[...state.posts]
+            newState.posts.push(newPost)
+            newState.newPostText=''
+            // state.posts.push(newPost)
+            // state.newPostText = ''
+            return newState;}
+        case UPDATE_NEW_POST_TEXT: {
+            let newState = {...state}
+            newState.newPostText = action.newText
+            // state.newPostText = action.newText
+            return newState;
+        }
         default:
             return state
     }

@@ -24,8 +24,8 @@ function App(props: PropsType) {
                     <Routes>
                         <Route path="/dialogs/*" element={
                             <DialogsContainer
-                                dialogsP={props.store.getState().dialogsPage}
-                                store={props.store}
+                                // dialogsP={props.store.getState().dialogsPage}
+                                // store={props.store}
                             />}/>
                         <Route path="/profile" element={
                             <Profile

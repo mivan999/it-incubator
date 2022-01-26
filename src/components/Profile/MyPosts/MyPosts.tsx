@@ -2,6 +2,7 @@ import React from 'react';
 import {Post} from './Post/Post'
 import s from './MyPosts.module.css'
 import {addPostType} from '../../../redux/state';
+import {MyPostPropsType} from "./MyPostsContainer";
 
 
 export type PostDataType = {
@@ -10,12 +11,7 @@ export type PostDataType = {
     likeCount: number
 
 }
-export type MyPostPropsType={
-    posts:PostDataType[]
-    newPostText:string|undefined
-    updateNewPostText:(text:string)=>void
-    addPost:(post:addPostType)=>void
-}
+
 const MyPosts = (props:MyPostPropsType) => {
     console.log("MyPosts props", props)
     let newPost=React.createRef<HTMLTextAreaElement>()
