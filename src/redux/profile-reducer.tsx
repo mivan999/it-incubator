@@ -26,16 +26,9 @@ const profileReducer = (state:ProfilePageType=initialState, action:ActionType):P
                 message: state.newPostText,
                 likeCount: 0,
             }
-            let newState={...state}
-            newState.posts=[...state.posts]
-            newState.posts.push(newPost)
-            newState.newPostText=''
-            return newState;}
+            return {...state,newPostText:'',posts:[...state.posts,newPost]}}
         case UPDATE_NEW_POST_TEXT: {
-            let newState = {...state}
-            newState.newPostText = action.newText
-            // state.newPostText = action.newText
-            return newState;
+            return  {...state,newPostText :action.newText}
         }
         default:
             return state

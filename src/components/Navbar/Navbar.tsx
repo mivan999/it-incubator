@@ -12,20 +12,26 @@ const Navbar = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to="/profile" className = { classNav => classNav.isActive ? s.active : s.item }>Profile</NavLink>
+                <NavLink to="/profile"
+                         className={classNav => classNav.isActive ? s.active : s.item}>Profile</NavLink>
             </div>
-            <div className={s.item }>
-                <NavLink to="/dialogs" className = { navData => navData.isActive ? s.active : s.item }>Messages</NavLink>
+            <div className={s.item}>
+                <NavLink to="/dialogs"
+                         className={navData => navData.isActive ? s.active : s.item}>Messages</NavLink>
                 {/*<Friends friends={props.friends}/>*/}
-            {/*</div>*/}
-            {/*/!*<div className={s.item}>*!/*/}
-            {/*    <NavLink to "/">News</NavLink>*/}
-            {/*</div>*/}
-            {/*<div className={s.item}>*/}
-            {/*    <NavLink to "/">Music</NavLink>*/}
-            {/*</div>*/}
-            {/*<div className={s.item}>*/}
-            {/*    <NavLink to "/">Settings</NavLink>*/}
+                {/*</div>*/}
+                {/*/!*<div className={s.item}>*!/*/}
+                {/*    <NavLink to "/">News</NavLink>*/}
+                {/*</div>*/}
+                {/*<div className={s.item}>*/}
+                {/*    <NavLink to "/">Music</NavLink>*/}
+                {/*</div>*/}
+                {/*<div className={s.item}>*/}
+                {/*    <NavLink to "/">Settings</NavLink>*/}
+            </div>
+            <div className={s.item}>
+                <NavLink to="/users"
+                         className={classNav => classNav.isActive ? s.active : s.item}>Users</NavLink>
             </div>
         </nav>
     )

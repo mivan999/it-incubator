@@ -6,6 +6,8 @@ import Profile from './components/Profile/Profile';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {StoreType} from './redux/redux-store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/Users/UsersContainer';
+
 
 type PropsType = {
     store: StoreType
@@ -28,12 +30,10 @@ function App(props: PropsType) {
                                 // store={props.store}
                             />}/>
                         <Route path="/profile" element={
-                            <Profile
-                                store={props.store}
-                                profilePage={props.store.getState().profilePage}
-                                dispatch={props.store.dispatch.bind(props.store)}
+                            <Profile/>}/>
 
-                            />}/>
+                        <Route path="/users" element={
+                            <UsersContainer/>}/>
                     </Routes>
                 </div>
 

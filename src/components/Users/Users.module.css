@@ -1,0 +1,11 @@
+.imgAva{
+    height: 100px;
+    border-radius: 45%;
+}
+.name{
+    color: gold;
+    font-size: 25px;
+}
+.wrap{
+    padding: 15px;
+}

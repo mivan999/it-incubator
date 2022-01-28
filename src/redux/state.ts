@@ -1,8 +1,12 @@
 import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
 import profileReducer, {AddPostAC, ChangePostAC} from './profile-reducer';
-import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from './dialogs-reducer';
-
+import dialogsReducer, {
+    sendMessageAC,
+    updateNewMessageBodyAC
+} from './dialogs-reducer';
+import {followAC, setUsersAC, unfollowAC } from './users-reducer';
+// import {getUsersAC} from './users-reducer';
 
 
 export type ProfilePageType = {
@@ -49,6 +53,10 @@ export type ActionType =
     | ReturnType<typeof ChangePostAC>
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
+
 const store: StoreType = {
     _state: {
         profilePage: {
