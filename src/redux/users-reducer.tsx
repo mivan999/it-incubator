@@ -6,41 +6,31 @@ const SET_USER = 'SET_USER'
 
 export type UserType = {
     id: string
-    image:string
-    status:string
+    photos: {
+        small?: string,
+        large?: string
+    }
+    status: string
     name: string
-    location:UserLocations
+    // location:UserLocations
     followed: boolean
 }
-export type UserLocations={
-    country:string
-    city:string
+export type UserLocations = {
+    country: string
+    city: string
 }
 
 const initialState = {
     users: [
-        {id:'1',
-            name:'alex',
-            followed:false,
-
-            image:'https://i.imgur.com/dmRcOOI.png',
-            status:'i am a status',
-            location:{
-                country:"Russia",
-                city:"Omsk"
-            },
-        },
-        {id:'2',
-            name:'dima',
-            followed:false,
-
-            image:'https://i.imgur.com/dmRcOOI.png',
-            status:'i am in Mayami',
-            location:{
-                country:"usa",
-                city:"Mayami"
-            },
-        }
+        // {
+        //     id: '1',
+        //     name: 'alex',
+        //     followed: false,
+        //
+        //     photos: {small: 'https://i.imgur.com/dmRcOOI.png'},
+        //     status: 'i am a status',
+        // },
+        {},
     ] as UserType[]
 }
 export type initialStateType = typeof initialState
@@ -49,12 +39,13 @@ const usersReducer = (state: initialStateType = initialState, action: ActionType
     switch (action.type) {
         case FOLLOW: {
 
-            return {...state, users: state.users.map
+            return {
+                ...state, users: state.users.map
                 (u => {
-                    if (u.id === action.payload.userID) {
-                        return {...u, followed: true};
-                    }
-                    return u;
+                        if (u.id === action.payload.userID) {
+                            return {...u, followed: true};
+                        }
+                        return u;
                     }
                 )
             };
@@ -64,13 +55,13 @@ const usersReducer = (state: initialStateType = initialState, action: ActionType
             return {
                 ...state, users: state.users.map
                 (u => {
-                    if (u.id === action.payload.userID) {
-                        return {...u, followed: false};
+                        if (u.id === action.payload.userID) {
+                            return {...u, followed: false};
+                        }
+                        return u;
                     }
-                    return u;
-                }
-                       // u.id === action.payload.userID ? {...u, followed: false} : u
-                    
+                    // u.id === action.payload.userID ? {...u, followed: false} : u
+
                 )
             };
         }

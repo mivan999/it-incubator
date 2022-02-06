@@ -26,7 +26,7 @@ export const  mapStateToProps=(state:AppStateType):mapStateToPropsType=>{
         usersPage:state.usersPage
     }
 }
-export const mapDispatchtoProps=(dispatch:Dispatch):mapDispatchToPropsType=>{
+export const mapDispatchToProps=(dispatch:Dispatch):mapDispatchToPropsType=>{
     return {
         follow:(userID:string)=>{
             dispatch(followAC(userID))
@@ -40,6 +40,6 @@ export const mapDispatchtoProps=(dispatch:Dispatch):mapDispatchToPropsType=>{
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,mapDispatchtoProps)(Users);
+export const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(Users);
 
 export default UsersContainer;
