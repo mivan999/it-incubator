@@ -1,54 +1,85 @@
 import React from 'react';
 import {UserPropsType} from './UsersContainer';
 import s from './Users.module.css'
-import * as axios from "axios"
+import styles from './Users.module.css'
+import axios from 'axios';
+import ava from './../../assets/ava.jpeg'
+import {UserType} from "../../redux/users-reducer";
 
-const Users = (props: UserPropsType) => {
-    const getUsers = () => {
-        debugger
-        axios.default.get('https://social-network.samuraijs.com/api/1.0/users').then((response:any)=>{
-            props.setUsers(response.data.users)
-            console.log(response.data.users)
+type responseType = {
+    items: UserType[]
+    //     [
+    //     id: number,
+    //     name: string,
+    //     photos: {
+    //         small?: string,
+    //         large?: string
+    //     },
+    //     followed: boolean,
+    //     status?: string
+    // ],
+    totalCount: number,
+    error: string,
+}
+
+class Users extends React.Component<UserPropsType> {
+    componentDidMount() {
+        axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((response) => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+            console.log(response.data.items)
         })
-    }
-    if (props.usersPage.users.length === 0) {
 
-        // props.setUsers([
-        //     {
-        //         id: '3',
-        //         name: 'bob',
-        //         followed: false,
-        //
-        //         image: 'https://i.imgur.com/dmRcOOI.png',
-        //         status: 'i am a status',
-        //         location: {
-        //             country: 'usa',
-        //             city: 'NY'
-        //         },
-        //     }
-        // ])
     }
-    const setFollow = (id:string, f:boolean) => {
-      if(!f) props.follow(id)
-      if(f) props.unfollow(id)
+    onPageChanges=(pageNumber:number)=>{
+        this.props.setCurrentPage(pageNumber)
+        axios.get<responseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then((response) => {
+            this.props.setUsers(response.data.items)
+            console.log(response.data.items)
+        })
+
     }
-    return (
-        <div className={s.wrap}>
-            <button onClick={getUsers}>getUsers</button>
-            {props.usersPage.users.map((u:any) => (
+    render() {
+        const setFollow = (id: string, f: boolean) => {
+            if (!f) this.props.follow(id)
+            if (f) this.props.unfollow(id)
+        }
+        let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let page = []
+        for (let i = 1; i <= pageCount; i++) {
+            page.push(i)
+        }
+        console.log('page=',this.props)
+        return (
+            <div className={s.wrap}>
                 <div>
-<div className={s.name}>                   {u.name}</div>
-                    <div ><img className={s.imgAva} src={u.photos?u.photos.small:"https://www.google.com/imgres?imgurl=https%3A%2F%2Fseeding.com.ua%2Fwp-content%2Fuploads%2F2017%2F04%2F%25D0%25B0%25D0%25B2%25D0%25B0%25D1%2582%25D0%25B0%25D1%2580%25D0%25BA%25D0%25B0-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D1%2582%25D0%25B7%25D1%258B%25D0%25B2%25D0%25BE%25D0%25B2.jpg&imgrefurl=https%3A%2F%2Fseeding.com.ua%2Fotzyvy%2Fvolodimir-merkulov-pp-m-agro-zaporizka-obl%2Fattachment%2Favatarka-dlja-otzyvov%2F&tbnid=a70AaaHLqPZj6M&vet=10CHAQMyiZAWoXChMI0MSGt47r9QIVAAAAAB0AAAAAEAI..i&docid=_Pl5cIGQZoljkM&w=500&h=541&q=avatarka&ved=0CHAQMyiZAWoXChMI0MSGt47r9QIVAAAAAB0AAAAAEAI"} alt="img"/></div>
-                    <div>{u.status}
-                       </div>
+                   
+                    {
+                        page.map(p => (
+                            <span className={this.props.currentPage===p ? styles.selectedPage:""} onClick={()=>{this.onPageChanges(p)}}>{p}</span>
+                        )
+                    )
+                    }
+                </div>
+                {this.props.users.map((u: UserType) => (
                     <div>
-                        <button onClick={()=>{setFollow(u.id,u.followed)}}>
-                        {u.followed?"follow":"unfollow"}
-                    </button>
-                    </div>
-                </div>))}
-        </div>
-    );
-};
+                        <div className={s.name}>{u.name}</div>
+                        <div>
+                            <img className={s.imgAva} src={u.photos.small != null ? u.photos.small : ava} alt="img"/>
+                        </div>
+                        <div>{u.status}
+                        </div>
+                        <div>
+                            <button onClick={() => {
+                                setFollow(u.id, u.followed)
+                            }}>
+                                {u.followed ? "follow" : "unfollow"}
+                            </button>
+                        </div>
+                    </div>))}
+            </div>
+        );
+    }
+}
 
 export default Users;

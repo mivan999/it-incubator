@@ -9,3 +9,6 @@
 .wrap{
     padding: 15px;
 }
+.selectedPage{
+    color: red;
+}

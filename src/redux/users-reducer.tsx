@@ -3,35 +3,28 @@ import {ActionType} from './state';
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USER = 'SET_USER'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USER_COUNT ="SET_TOTAL_USER_COUNT"
 
 export type UserType = {
     id: string
+    name: string
     photos: {
         small?: string,
         large?: string
     }
-    status: string
-    name: string
-    // location:UserLocations
     followed: boolean
-}
-export type UserLocations = {
-    country: string
-    city: string
+    status?: string
+
 }
 
+
 const initialState = {
-    users: [
-        // {
-        //     id: '1',
-        //     name: 'alex',
-        //     followed: false,
-        //
-        //     photos: {small: 'https://i.imgur.com/dmRcOOI.png'},
-        //     status: 'i am a status',
-        // },
-        {},
-    ] as UserType[]
+    users: [] as UserType[],
+    pageSize:5,
+    totalUsersCount:0,
+    currentPage:1,
+
 }
 export type initialStateType = typeof initialState
 
@@ -66,7 +59,13 @@ const usersReducer = (state: initialStateType = initialState, action: ActionType
             };
         }
         case SET_USER: {
-            return {...state, users: {...action.payload.users}}
+            return {...state, users:action.payload.users}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage:action.payload.currentPage}
+        }
+        case SET_TOTAL_USER_COUNT: {
+            return {...state, totalUsersCount:action.payload.totalUsersCount}
         }
         default:
             return state
@@ -94,6 +93,20 @@ export const setUsersAC = (users: UserType[]) => (
         type: SET_USER,
         payload: {
             users
+        }
+    } as const)
+export const setCurrentPageAC = (currentPage:number) => (
+    {
+        type: SET_CURRENT_PAGE,
+        payload: {
+            currentPage
+        }
+    } as const)
+export const setTotalUsersCountAC = (totalUsersCount:number) => (
+    {
+        type: SET_TOTAL_USER_COUNT,
+        payload: {
+            totalUsersCount
         }
     } as const)
 

@@ -5,7 +5,7 @@ import dialogsReducer, {
     sendMessageAC,
     updateNewMessageBodyAC
 } from './dialogs-reducer';
-import {followAC, setUsersAC, unfollowAC } from './users-reducer';
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from './users-reducer';
 // import {getUsersAC} from './users-reducer';
 
 
@@ -56,6 +56,9 @@ export type ActionType =
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
+
 
 const store: StoreType = {
     _state: {
