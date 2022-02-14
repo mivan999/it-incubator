@@ -5,7 +5,14 @@ import dialogsReducer, {
     sendMessageAC,
     updateNewMessageBodyAC
 } from './dialogs-reducer';
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from './users-reducer';
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    toggleIsFetchingAC,
+    unfollowAC
+} from './users-reducer';
 // import {getUsersAC} from './users-reducer';
 
 
@@ -58,6 +65,7 @@ export type ActionType =
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>
 
 
 const store: StoreType = {
