@@ -1,6 +1,6 @@
 import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
-import profileReducer, {AddPostAC, ChangePostAC} from './profile-reducer';
+import profileReducer, {AddPostAC, ChangePostAC, profileType, setUsersProfile} from './profile-reducer';
 import dialogsReducer, {
     sendMessageAC,
     updateNewMessageBodyAC
@@ -20,6 +20,7 @@ export type ProfilePageType = {
 
     posts: PostDataType[]
     newPostText: string | undefined
+    profile:profileType|null
 }
 export type DialogsPageType = {
     dialogs: DialogsDataType[]
@@ -66,6 +67,7 @@ export type ActionType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUsersProfile>
 
 
 const store: StoreType = {
@@ -85,6 +87,7 @@ const store: StoreType = {
                 },
             ],
             newPostText: 'it',
+            profile:null,
         },
         dialogsPage: {
             dialogs: [

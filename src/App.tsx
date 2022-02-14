@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {StoreType} from './redux/redux-store';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 
 type PropsType = {
@@ -30,7 +30,7 @@ function App(props: PropsType) {
                                 // store={props.store}
                             />}/>
                         <Route path="/profile" element={
-                            <Profile/>}/>
+                            <ProfileContainer/>}/>
 
                         <Route path="/users" element={
                             <UsersContainer/>}/>
