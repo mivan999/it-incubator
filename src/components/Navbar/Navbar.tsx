@@ -13,11 +13,14 @@ const Navbar = () => {
         <nav className={s.nav}>
             <div className={s.item}>
                 <NavLink to="/profile"
-                         className={classNav => classNav.isActive ? s.active : s.item}>Profile</NavLink>
+                         activeClassName={s.active}
+                >Profile</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to="/dialogs"
-                         className={navData => navData.isActive ? s.active : s.item}>Messages</NavLink>
+                         // className={navData => navData.isActive ? s.active : s.item}
+                         activeClassName={s.active}
+                >Messages</NavLink>
                 {/*<Friends friends={props.friends}/>*/}
                 {/*</div>*/}
                 {/*/!*<div className={s.item}>*!/*/}
@@ -31,7 +34,9 @@ const Navbar = () => {
             </div>
             <div className={s.item}>
                 <NavLink to="/users"
-                         className={classNav => classNav.isActive ? s.active : s.item}>Users</NavLink>
+                         // className={classNav => classNav.isActive ? s.active : s.item}
+                         activeClassName={s.active}
+                >Users</NavLink>
             </div>
         </nav>
     )
