@@ -2,21 +2,21 @@ import React from 'react';
 import s from './Users.module.css'
 import styles from './Users.module.css'
 import ava from './../../assets/ava.jpeg'
-import {UserType} from "../../redux/users-reducer";
-import {NavLink} from "react-router-dom";
+import {UserType} from '../../redux/users-reducer';
+import {NavLink} from 'react-router-dom';
 
 
 type propsType = {
-       users: UserType[]
+    users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    follow:(userID:string)=>void
-    unfollow:(userID:string)=>void
-    setUsers:(users:UserType[])=>void
-    setCurrentPage:(page:number)=>void
-    setTotalUsersCount:(usersCount:number)=>void
-    onPageChanges:(p:number)=>void
+    follow: (userID: string) => void
+    unfollow: (userID: string) => void
+    setUsers: (users: UserType[]) => void
+    setCurrentPage: (page: number) => void
+    setTotalUsersCount: (usersCount: number) => void
+    onPageChanges: (p: number) => void
 }
 const Users = (props: propsType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -33,9 +33,11 @@ const Users = (props: propsType) => {
             <div>
                 {
                     page.map(p => (
-                            <span className={props.currentPage === p ? styles.selectedPage : ""} onClick={() => {
-                                props.onPageChanges(p)
-                            }}>{p}</span>
+                            <span
+                                className={props.currentPage === p ? styles.selectedPage : ''}
+                                onClick={() => {
+                                    props.onPageChanges(p)
+                                }}>{p}</span>
                         )
                     )
                 }
@@ -45,7 +47,9 @@ const Users = (props: propsType) => {
                     <div className={s.name}>{u.name}</div>
                     <div>
                         <NavLink to={'/profile/' + u.id}>
-                        <img className={s.imgAva} src={u.photos.small != null ? u.photos.small : ava} alt="img"/>
+                            <img className={s.imgAva}
+                                 src={u.photos.small != null ? u.photos.small : ava}
+                                 alt="img"/>
                         </NavLink>
                     </div>
                     <div>{u.status}
@@ -54,7 +58,7 @@ const Users = (props: propsType) => {
                         <button onClick={() => {
                             setFollow(u.id, u.followed)
                         }}>
-                            {u.followed ? "follow" : "unfollow"}
+                            {u.followed ? 'follow' : 'unfollow'}
                         </button>
                     </div>
                 </div>))}

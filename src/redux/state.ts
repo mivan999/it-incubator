@@ -13,6 +13,7 @@ import {
     toggleIsFetching,
     unfollow
 } from './users-reducer';
+import { setAuthUserData } from './auth-reducer';
 // import {getUsersAC} from './users-reducer';
 
 
@@ -68,6 +69,7 @@ export type ActionType =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUsersProfile>
+    | ReturnType<typeof setUserData>
 
 
 const store: StoreType = {
