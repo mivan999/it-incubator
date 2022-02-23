@@ -16,7 +16,7 @@ type ProfileType =
     & RouteComponentProps<PathParamsType>
 
 type mapDispatchToPropsType = {
-    setUsersProfile: (profile: profileType) => { readonly type: 'SET_USER_PROFILE', readonly profile: profileType }
+    setUsersProfile: (profile: profileType) => void
 }
 type mapStateToPropsType = {
     profile: profileType | null
@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component<ProfileType> {
 
         return (
 
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile  profile={this.props.profile}/>
 
         );
     }

@@ -1,11 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Header from './Header';
-import s from './Header.module.css';
-import {setAuthUserData} from './../../redux/auth-reducer'
+import {setAuthUserData} from '../../redux/auth-reducer'
 import axios from 'axios';
-import { AppStateType } from '../../redux/redux-store';
+import {AppStateType} from '../../redux/redux-store';
 
 type responseType = {
     resultCode: number
@@ -18,9 +16,7 @@ type responseType = {
 }
 export type AuthPropsType= mapDispatchToPropsType & mapStateToPropsType
 type mapDispatchToPropsType = {
-    setAuthUserData: (id:number,email:string,login:string) => 
-        { readonly type: 'SET_USER_DATA', readonly data: {
-            id:number,email:number,login:number } }
+    setAuthUserData: (id:number,email:string,login:string) => void
 }
 
 class HeaderContainer extends React.Component <AuthPropsType>{
@@ -39,15 +35,15 @@ class HeaderContainer extends React.Component <AuthPropsType>{
     }
 
     render() {
-        return <Header {...this.props}/>;
+        return <Header />;
     }
 }
 type mapStateToPropsType={
     isAuth:boolean
-    login:string
+    login:string|null
 }
-let mapStateToProps=(state:AppStateType)=>{
-    isAuth:state.auth.isAuth
+let mapStateToProps=(state:AppStateType):mapStateToPropsType=>({
+    isAuth:state.auth.isAuth,
     login:state.auth.login
-}
+})
 export default connect(mapStateToProps,{setAuthUserData})(HeaderContainer);

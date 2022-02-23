@@ -69,7 +69,7 @@ export type ActionType =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUsersProfile>
-    | ReturnType<typeof setUserData>
+    | ReturnType<typeof setAuthUserData>
 
 
 const store: StoreType = {

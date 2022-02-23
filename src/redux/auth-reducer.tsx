@@ -1,4 +1,4 @@
-import {ActionType, DialogsPageType} from './state';
+import {ActionType} from './state';
 
 const SET_USER_DATA = 'SET_USER_DATA'
 type authType = {
