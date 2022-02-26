@@ -1,5 +1,6 @@
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
 import {ActionType, addPostType, ProfilePageType} from './state';
+import {usersAPI} from "../api/api";
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST='ADD-POST'
 const SET_USER_PROFILE='SET_USER_PROFILE'
@@ -64,5 +65,11 @@ export type profileType={
     }
 }
 export const setUsersProfile = (profile:profileType) => ({type: SET_USER_PROFILE, profile} as const)
+export const getUsersProfile = (UserId:string) =>(dispatch:any)=>{
+     usersAPI.getProfile(UserId)
+        .then((response) => {
+            dispatch(setUsersProfile(response.data))
+        })
+}
 
 export default profileReducer;
