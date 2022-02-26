@@ -1,19 +1,17 @@
 import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
 import profileReducer, {AddPostAC, ChangePostAC, profileType, setUsersProfile} from './profile-reducer';
-import dialogsReducer, {
-    sendMessageAC,
-    updateNewMessageBodyAC
-} from './dialogs-reducer';
+import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from './dialogs-reducer';
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleFollowingProgress,
+    setUsers,
+    toggleFollowingProgress,
     toggleIsFetching,
-    unfollow
+    unfollowSuccess
 } from './users-reducer';
-import { setAuthUserData } from './auth-reducer';
+import {setAuthUserData} from './auth-reducer';
 // import {getUsersAC} from './users-reducer';
 
 
@@ -63,8 +61,8 @@ export type ActionType =
     | ReturnType<typeof updateNewMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
     | ReturnType<typeof setUsers>
-    | ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
