@@ -8,31 +8,32 @@ import {Dispatch} from "redux";
 import {DialogsPageType} from "../../redux/state";
 
 
-
-type mapStateToPropsType={
-    dialogsP:DialogsPageType
+type mapStateToPropsType = {
+    isAuth: boolean
+    dialogsP: DialogsPageType
 }
-type mapDispatchToPropsType={
-    updateNewMessageBody:(body:string)=>void,
-    sendMessage:()=>void
+type mapDispatchToPropsType = {
+    updateNewMessageBody: (body: string) => void,
+    sendMessage: () => void
 }
-export type DialogsPropsType=mapDispatchToPropsType & mapStateToPropsType
+export type DialogsPropsType = mapDispatchToPropsType & mapStateToPropsType
 
 
-let mapStateToProps=(state:AppStateType):mapStateToPropsType=>{
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        dialogsP:state.dialogsPage
+        dialogsP: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
-let mapDispatchToProps=(dispatch:Dispatch):mapDispatchToPropsType=>{
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        updateNewMessageBody:(body:string)=>{
+        updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyAC(body))
         },
-        sendMessage:()=>{
+        sendMessage: () => {
             dispatch(sendMessageAC())
         }
     }
 }
-const DialogsContainer=connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 export default DialogsContainer;

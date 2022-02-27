@@ -7,6 +7,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
 
 
 type PropsType = {
@@ -24,6 +25,7 @@ function App(props: PropsType) {
                 <Navbar />
                 <div className="app-wrapper-content">
                     <Switch>
+                        {/***********************************for router 6 ver*******************/}
                     {/*<Routes> //использовать для react-reouter-dom 6 ver*/}
                     {/*    <Route path="/dialogs/*" element={*/}
                     {/*        <DialogsContainer*/}
@@ -36,13 +38,15 @@ function App(props: PropsType) {
                     {/*    <Route path="/users" element={*/}
                     {/*        <UsersContainer/>}/>*/}
                     {/*</Routes>*/}
-                        <Route path="/dialogs/*" render={()=>
+                        <Route path="/dialogs*" render={()=>
                             <DialogsContainer/>}/>
                         <Route path="/profile/:userId?"  render={()=>
                             <ProfileContainer/>}/>
 
                         <Route path="/users"  render={()=>
                             <UsersContainer/>}/>
+                        <Route path="/login"  render={()=>
+                            <Login/>}/>
                     </Switch>
                 </div>
 
