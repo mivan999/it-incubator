@@ -3,11 +3,11 @@ import s from './Profile.module.css'
 import {profileType} from '../../../redux/profile-reducer';
 import Preloader from '../../common/Preloader/Preloader';
 import ava from './../../../assets/ava.jpeg'
+import ProfileStatus from './ProfileStatus'
 
 export type ProfilePropsType = {
     profile: profileType | null
 }
-import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props: ProfilePropsType) => {
     if (!props.profile) {

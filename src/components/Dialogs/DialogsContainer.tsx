@@ -9,7 +9,7 @@ import {DialogsPageType} from "../../redux/state";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect"
 
 type mapStateToPropsType = {
-    isAuth: boolean
+
     dialogsP: DialogsPageType
 }
 type mapDispatchToPropsType = {
@@ -21,8 +21,8 @@ export type DialogsPropsType = mapDispatchToPropsType & mapStateToPropsType
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        dialogsP: state.dialogsPage,
-        isAuth: state.auth.isAuth
+        dialogsP: state.dialogsPage
+
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
