@@ -1,6 +1,7 @@
 import {DialogsDataType, MessageDataType} from '../components/Dialogs/Dialogs';
 import {PostDataType} from '../components/Profile/MyPosts/MyPosts';
-import profileReducer, {AddPostAC, ChangePostAC, profileType, setUsersProfile} from './profile-reducer';
+import profileReducer, {AddPostAC, ChangePostAC, profileType,
+    setStatusAC, setUsersProfile} from './profile-reducer';
 import dialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from './dialogs-reducer';
 import {
     followSuccess,
@@ -20,6 +21,7 @@ export type ProfilePageType = {
     posts: PostDataType[]
     newPostText: string | undefined
     profile:profileType|null
+    status:string
 }
 export type DialogsPageType = {
     dialogs: DialogsDataType[]
@@ -69,6 +71,7 @@ export type ActionType =
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatusAC>
 
 
 const store: StoreType = {
@@ -89,6 +92,7 @@ const store: StoreType = {
             ],
             newPostText: 'it',
             profile:null,
+            status:"",
         },
         dialogsPage: {
             dialogs: [

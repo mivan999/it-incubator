@@ -2,8 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
 import DialogItem from './DialogsItem/DialogItem';
-import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
+import {DialogsPropsType} from './DialogsContainer';
 
 
 export type DialogsDataType = {
