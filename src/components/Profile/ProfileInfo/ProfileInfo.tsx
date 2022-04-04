@@ -9,6 +9,7 @@ export type ProfilePropsType = {
     profile: profileType | null
     status: string
     updateStatus: (status: string) => void
+
 }
 
 const ProfileInfo = (props: ProfilePropsType) => {
@@ -21,7 +22,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
             <div className={s.description}>
 
                 <ProfileStatus status={props.status}
-                               updateStatus={props.updateStatus}/>
+                               updateStatus={props.updateStatus} />
                 <div><span>Имя: </span>{props.profile.fullName}</div>
                 <div><span>About me: </span>{props.profile.aboutMe}</div>
                 <div><img

@@ -8,6 +8,7 @@ type ProfilePropsType={
     profile:profileType |null
     status:string
     updateStatus:(status:string)=>void
+
     }
 const Profile = (props:ProfilePropsType) => {
 

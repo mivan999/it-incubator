@@ -6,6 +6,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST='ADD-POST'
 const SET_USER_PROFILE='SET_USER_PROFILE'
 const SET_STATUS='SET_STATUS'
+    
 let initialState:ProfilePageType={
 
         posts: [
@@ -40,8 +41,9 @@ const profileReducer = (state:ProfilePageType=initialState, action:ActionType):P
             return  {...state,profile :action.profile}
         }
         case SET_STATUS: {
-            return  {...state,status :action.status}
+            return  {...state,status: action.status}
         }
+     
         default:
             return state
     }
@@ -50,6 +52,7 @@ const profileReducer = (state:ProfilePageType=initialState, action:ActionType):P
 export const ChangePostAC = (text: string | undefined) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
 export const AddPostAC = (post: addPostType) => ({type: ADD_POST, postMessage: post} as const)
 export const setStatusAC = (status:string) => ({type: SET_STATUS, status} as const)
+
 export type profileType={
     aboutMe: string
     contacts: {
@@ -85,11 +88,13 @@ export const getStatus=(userId:string)=>(dispatch:Dispatch)=>{
         })
 }
 export const updateStatus=(status:string)=>(dispatch:Dispatch)=>{
-
     profileAPI.updateStatus(status)
         .then((response)=>{
-            if(response.data.resultcode===0)
-            dispatch(setStatusAC(response.data))
+            if(response.data.resultCode===0){
+
+                dispatch(setStatusAC(status))
+            }
+
         })
         .catch((err)=>{
             console.log('error:',err)

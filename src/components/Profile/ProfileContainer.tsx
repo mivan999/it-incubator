@@ -37,6 +37,17 @@ class ProfileContainer extends React.Component<ProfileType> {
         this.props.getStatus(UserId)
     }
 
+    componentDidUpdate(prevProps:ProfileType){//,prevState:ProfileType){
+
+        if(this.props.match.params.userId!== prevProps.match.params.userId){
+            let UserId = this.props.match.params.userId;
+            if(!UserId){
+                UserId="9514"
+            }
+            this.props.getUsersProfile(UserId)
+            this.props.getStatus(UserId)
+        }
+    }
     render() {
 
 
@@ -47,6 +58,8 @@ class ProfileContainer extends React.Component<ProfileType> {
                 profile={this.props.profile}
                 status={this.props.status}
                 updateStatus={this.props.updateStatus}
+           
+                
             />
 
         );
